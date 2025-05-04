@@ -148,7 +148,7 @@ input[type="text"]:focus {
             color: #dd0347;
         }
         .blue-id {
-            color: #006aff; /* Синий цвет для текста */
+            color: #2375D8; /* Синий цвет для текста */
         }
         
 
@@ -164,7 +164,7 @@ input[type="text"]:focus {
 .blue-id .r-container,
 .blue-id .rls-container 
 .blue-id .icon-container {
-    color: #006aff; /* Синий цвет для текста */
+    color: #2375D8; /* Синий цвет для текста */
 }
         .shifted-id-x-101 {
             margin-left: 20px;
@@ -1012,7 +1012,21 @@ updateOverlayFilter();
         // Если скорость не попала ни в одно условие, ставим "neyst tip.png"
         iconUrl = 'neyst tip.png';
     }
+    if (iconClass === 'blue-id') {
 
+const objectId2 = getNextObjectId1(); 
+iconUrl = 'blue.png';
+iconHtml = `
+    <div class="icon-container ${iconClass}">
+        <img src="${iconUrl}" class="icon" />
+        <div class="info-container ${shiftedClass} ${shiftedClasss}">
+            <span class="label-container ${iconClass}">0${objectId2}р</span>
+            <span class="r-container ${iconClass}">СВ</span>
+            <span class="rls-container ${iconClass}">ㅤ</span> <!-- РЛС -->
+        </div>
+    </div>
+`;
+} else {
     // Основной шаблон для всех остальных случаев
     iconHtml = `
         <div class="icon-container ${iconClass}">
@@ -1025,7 +1039,7 @@ updateOverlayFilter();
         </div>
     `;
 }
-
+}
 
                     const icon = L.divIcon({
                         className: 'icon',
@@ -1324,6 +1338,11 @@ function getNextObjectId() {
         </div>
     `;
     return iconHTML;
+}
+let objectIdCounter1 = '0750';
+
+function getNextObjectId1() {
+    return objectIdCounter1++;
 }
 
     </script>
