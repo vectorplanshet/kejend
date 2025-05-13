@@ -127,6 +127,15 @@ input[type="text"]:focus {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
+:root {
+    --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7) grayscale(1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .map-tiles {
+        filter: var(--map-tiles-filter, none);
+    }
+}
 
 .modal-button:hover {
     background-color: #6088e7;
@@ -618,11 +627,19 @@ input[type="text"]:focus {
         }).addTo(map);
         
         
-// Основной слой карты (OSM)
+// Обычный OSM (без фильтра)
 const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap contributors'
 });
+
+// OSM с CSS-фильтром (например, черно-белым)
+const osmGrayLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    className: 'map-tiles', // Класс, на который будет действовать фильтр
+    attribution: '© OpenStreetMap contributors'
+});
+
 
 // Черная OSM-карта (CartoDB Dark Matter)
 const darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -690,6 +707,7 @@ osmLayer.addTo(map);
 // Настройка слоев для переключения
 const baseLayers = {
     "OSM": osmLayer,
+    "OSM Gray": osmGrayLayer,
     "OSM Black": darkLayer,
     "Satellite": satelliteLayerWithBorders,
     "Google Maps": googleStreets,
