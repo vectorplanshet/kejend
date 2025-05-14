@@ -128,7 +128,7 @@ input[type="text"]:focus {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 :root {
-    --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7) grayscale(1);
+    --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.5) brightness(0.7) grayscale(3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1023,6 +1023,9 @@ updateOverlayFilter();
         iconUrl = 'mig-31.png';
     } else if (speed >= 800 && speed <= 801) {
         iconUrl = 'a-50.png';
+    } else if (speed >= 880 && speed <= 881) {
+        iconUrl = 'litak.png';
+        iconClass = 'litak-id'; 
     } else if (speed >= 1110 && speed <= 1111) {
         iconUrl = 'mirage.png';
         iconClass = 'blue-id';  
@@ -1030,20 +1033,31 @@ updateOverlayFilter();
         // Если скорость не попала ни в одно условие, ставим "neyst tip.png"
         iconUrl = 'neyst tip.png';
     }
-    if (iconClass === 'blue-id') {
-
-const objectId2 = getNextObjectId1(); 
-iconUrl = 'blue.png';
-iconHtml = `
-    <div class="icon-container ${iconClass}">
-        <img src="${iconUrl}" class="icon" />
-        <div class="info-container ${shiftedClass} ${shiftedClasss}">
-            <span class="label-container ${iconClass}">0${objectId2}р</span>
-            <span class="r-container ${iconClass}">СВ</span>
-            <span class="rls-container ${iconClass}">ㅤ</span> <!-- РЛС -->
+    if (iconUrl === 'litak.png') {
+        const objectId3 = getNextObjectId3(); 
+    iconHtml = `
+        <div class="icon-container ${iconClass}">
+            <img src="${iconUrl}" class="icon" />
+             <div class="info-container ${shiftedClass} ${shiftedClasss}">
+                <span class="label-container ${iconClass}">${objectId3}</span> 
+                <span class="r-container ${iconClass}">ЛБ·</span> 
+                <span class="rls-container ${iconClass}">ㅤ</span> <!-- РЛС -->                  
+            </div>
         </div>
-    </div>
-`;
+    `;
+} else if (iconClass === 'blue-id') {
+    const objectId2 = getNextObjectId1(); 
+    iconUrl = 'blue.png';
+    iconHtml = `
+        <div class="icon-container ${iconClass}">
+            <img src="${iconUrl}" class="icon" />
+            <div class="info-container ${shiftedClass} ${shiftedClasss}">
+                <span class="label-container ${iconClass}">0${objectId2}р</span>
+                <span class="r-container ${iconClass}">СВ</span>
+                <span class="rls-container ${iconClass}">ㅤ</span> <!-- РЛС -->
+            </div>
+        </div>
+    `;
 } else {
     // Основной шаблон для всех остальных случаев
     iconHtml = `
@@ -1051,8 +1065,8 @@ iconHtml = `
             <img src="${iconUrl}" class="icon" />
              <div class="info-container ${shiftedClass} ${shiftedClasss}">
                 <span class="label-container ${iconClass}">${objectId}р</span>
-                 <span class="r-container ${iconClass}">ПП·</span>
-                 <span class="rls-container ${iconClass}">ㅤ</span> <!-- РЛС -->                  
+                <span class="r-container ${iconClass}">ПП·</span>
+                <span class="rls-container ${iconClass}">ㅤ</span> <!-- РЛС -->                  
             </div>
         </div>
     `;
@@ -1362,7 +1376,11 @@ let objectIdCounter1 = '0750';
 function getNextObjectId1() {
     return objectIdCounter1++;
 }
+let objectIdCounter2 = '9900';
 
+function getNextObjectId3() {
+    return objectIdCounter2++;
+}
     </script>
 </body>
 </html>
